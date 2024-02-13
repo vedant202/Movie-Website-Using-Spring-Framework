@@ -1,0 +1,161 @@
+body{
+/*	background-color: black;*/
+background-image:url("../images/images.jpeg") ;
+object-fit: cover;
+background-clip: border-box;
+background-size: cover;
+background-position: center;
+
+}
+
+header{
+	    margin-bottom: 20px;
+}
+
+nav{
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.logo{
+	font-size: 2rem;
+}
+.logo a{
+	text-decoration: none;
+	color: khaki;
+}
+
+.navsLink{
+	width: 37%;
+}
+
+.navsLink ul{
+	color: red;
+	display: flex;
+	list-style: none;
+	    display: flex;
+    justify-content: flex-start;
+	
+	
+}
+
+
+.navsLink ul li{
+	width: 7rem;
+	font-size: 1.4rem;
+	cursor: pointer;
+}
+
+.navsLink ul li:hover{
+	color: darksalmon;
+}
+
+.toggleNav{
+	display: none;
+}
+
+@media (max-width: 768px){
+	.navsLink{
+		display: none;
+	}
+	.toggleNav{
+		display: block;
+		
+	}
+	.toggleNav img{
+		width: 35px;
+	}
+	nav{
+		    justify-content: space-between;
+    padding: 0 15px 0 15px;
+	}
+}
+
+.toggleMenue{
+	height: 0;
+	overflow: hidden;
+}
+
+.toggleMenue ul{
+	    list-style: none;
+    color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    
+    
+}
+
+.isOpen{
+	height: 200px;
+}
+
+.toggleMenue ul li{
+	    padding: 5px;
+	    font-size: large;
+}
+
+.toggleMenue ul li:hover{
+	color: darksalmon;
+}
+
+.cards{
+	color: white;
+	    display: flex;
+	flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card{
+	    border: red 1px solid;
+    width: 21rem;
+    padding: 10px;
+    margin-bottom: 20px;
+        background-color: #211e1e;
+    z-index: 10;
+    border: none;
+    border-radius: 10px;
+}
+
+
+.top{
+	    color: #dddd25;
+    font-size: 1.3rem;
+    padding: 10px 0px 10px 0px	
+}
+@media screen and (min-width: 768px){
+	.cards{
+		color: white;
+	    display: flex;
+	flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+		flex-direction: row;
+		
+		
+	}
+}
+
+.mid{
+	padding: 10px 0px 10px 0px
+}
+
+.cardBtn{
+	  margin: 10px 0 10px 0;
+    width: 100%;
+    font-size: medium;
+    background: #00a8fa;
+    color: white;
+    height: 2.5rem;
+    border-radius: 4px;
+    border: white 1px solid;
+    cursor: pointer;
+    
+}
+
