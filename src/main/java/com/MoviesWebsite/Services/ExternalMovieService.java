@@ -1,5 +1,6 @@
 package com.MoviesWebsite.Services;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -8,9 +9,7 @@ import com.google.gson.Gson;
 
 import org.springframework.beans.factory.annotation.Value;
 
-
-
-@Service
+@Component
 public class ExternalMovieService {
 	
 	@Value("${api.key}")
@@ -19,7 +18,7 @@ public class ExternalMovieService {
 	@Value("${api.value}")
 	private String apiValue;
 	
-	public String getAllMoviesData() {
+	public MovieResults getAllMoviesData() {
 		WebClient webC = WebClient.create();
 		
 		String api_url = apiValue;
@@ -32,7 +31,7 @@ public class ExternalMovieService {
 		MovieResults movieListjson  =  gson.fromJson(response,MovieResults.class);
 		
 		System.out.println("movieListjson in service  "+movieListjson);
-		return response;
+		return movieListjson;
 		
 		
 	}

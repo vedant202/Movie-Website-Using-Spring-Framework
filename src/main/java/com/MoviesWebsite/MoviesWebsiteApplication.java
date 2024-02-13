@@ -13,18 +13,21 @@ import com.MoviesWebsite.Entities.MovieEntity;
 public class MoviesWebsiteApplication {
 
 	public static void main(String[] args) {
-		System.out.println("Hello Vedant");
-		ApplicationContext context=SpringApplication.run(MoviesWebsiteApplication.class, args);
-		MovieRepository movieRepos= context.getBean(MovieRepository.class);
+//		System.out.println("Hello Vedant");
+//		ApplicationContext context=SpringApplication.run(MoviesWebsiteApplication.class, args);
+//		MovieRepository movieRepos= context.getBean(MovieRepository.class);
+//		
+//		MovieEntity me = new MovieEntity();
+//		me.setTitle("test");
+//		me.setOverview("test");
+//		me.setOriginal_title("test");
+//		me.setAdult(false);
+//		
+//		 MovieEntity savedEntity= movieRepos.save(me);
+//		
+//		 System.out.println(savedEntity);
 		
-		MovieEntity me = new MovieEntity();
-		me.setTitle("test");
-		me.setOverview("test");
-		me.setOriginal_title("test");
-		me.setAdult(false);
-		
-		 MovieEntity savedEntity= movieRepos.save(me);
-		 System.out.println(savedEntity);
+		SpringApplication.run(MoviesWebsiteApplication.class, args);
 		
 	}
 

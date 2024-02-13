@@ -1,5 +1,8 @@
 package com.MoviesWebsite.Entities;
 
+import java.util.Date;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,11 +20,14 @@ public class MovieEntity {
 	private boolean adult;
 	private String original_language;
 	private String original_title;
-	private String release_date;
+	private Date releaseDate;
 	private String title;
 	private float vote_average;
 	private int vote_count;
+	
+	@Column(columnDefinition = "TEXT")
 	private String overview;
+	
 	private String popularity;
 	private String poster_path;
 	private String backdrop_path;
@@ -60,13 +66,13 @@ public class MovieEntity {
 	}
 
 
-	public String getRelease_date() {
-		return release_date;
+	public Date getRelease_date() {
+		return releaseDate;
 	}
 
 
-	public void setRelease_date(String release_date) {
-		this.release_date = release_date;
+	public void setRelease_date(Date release_date) {
+		this.releaseDate = release_date;
 	}
 
 
@@ -115,6 +121,16 @@ public class MovieEntity {
 	}
 
 
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
 	public void setPopularity(String popularity) {
 		this.popularity = popularity;
 	}
@@ -140,14 +156,15 @@ public class MovieEntity {
 	}
 
 
-	public MovieEntity(boolean adult, String original_language, String original_title, String release_date,
+	public MovieEntity(int id,boolean adult, String original_language, String original_title, Date release_date,
 			String title, float vote_average, int vote_count, String overview, String popularity, String poster_path,
 			String backdrop_path) {
 		super();
+		this.id = id;
 		this.adult = adult;
 		this.original_language = original_language;
 		this.original_title = original_title;
-		this.release_date = release_date;
+		this.releaseDate = release_date;
 		this.title = title;
 		this.vote_average = vote_average;
 		this.vote_count = vote_count;
@@ -160,7 +177,7 @@ public class MovieEntity {
 	@Override
 	public String toString() {
 		return "MovieEntity [id=" + id + ", adult=" + adult + ", original_language=" + original_language
-				+ ", original_title=" + original_title + ", release_date=" + release_date + ", title=" + title
+				+ ", original_title=" + original_title + ", release_date=" + releaseDate + ", title=" + title
 				+ ", vote_average=" + vote_average + ", vote_count=" + vote_count + ", overview=" + overview
 				+ ", popularity=" + popularity + ", poster_path=" + poster_path + ", backdrop_path=" + backdrop_path
 				+ "]";

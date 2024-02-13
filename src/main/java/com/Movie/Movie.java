@@ -1,11 +1,12 @@
 package com.Movie;
 
+import java.util.Date;
 
 public class Movie{
 	private boolean adult;
 	private String original_language;
 	private String original_title;
-	private String release_date;
+	private Date release_date;
 	private String title;
 	private float vote_average;
 	private int vote_count;
@@ -19,7 +20,7 @@ public class Movie{
 	public Movie() {}
 	
 
-	public Movie(boolean adult, String original_language, String original_title, String release_date, String title,
+	public Movie(boolean adult, String original_language, String original_title, Date release_date, String title,
 			float vote_average, int vote_count, String overview, String popularity, String poster_path,
 			String backdrop_path) {
 		super();
@@ -97,10 +98,10 @@ public class Movie{
 	public void setOriginal_title(String original_title) {
 		this.original_title = original_title;
 	}
-	public String getRelease_date() {
+	public Date getRelease_date() {
 		return release_date;
 	}
-	public void setRelease_date(String release_date) {
+	public void setRelease_date(Date release_date) {
 		this.release_date = release_date;
 	}
 	public String getTitle() {
