@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.MoviesWebsite.Entities.MovieEntity;
 
-public interface MovieRepository extends CrudRepository<MovieEntity, Integer>{
+public interface MovieRepository extends JpaRepository <MovieEntity, Integer>{
 	List<MovieEntity> findByTitleContaining(String title);
 	
 	List<MovieEntity> findAllByOrderByReleaseDateDesc();

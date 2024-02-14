@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.MoviesWebsite.DAO.MovieRepository;
 import com.MoviesWebsite.Entities.MovieEntity;
@@ -26,6 +27,15 @@ public class MoviesWebsiteApplication {
 //		 MovieEntity savedEntity= movieRepos.save(me);
 //		
 //		 System.out.println(savedEntity);
+		
+		
+//		System.out.println(new BCryptPasswordEncoder().encode(""));
+
+		/*
+		 * My development role is admin and username vedant@gmail.com and password vedant
+		 *   role is user and username aryan@gmail.com and password aryan
+		 *   
+		 */
 		
 		SpringApplication.run(MoviesWebsiteApplication.class, args);
 		
