@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,8 @@ public class Movies {
 	MovieService movie;
 	
 	@GetMapping("/")
+//	@PreAuthorize("hasAuthority('ROLE_USER')")  this is only for user role and this is method level security
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
 	public String hello(Model model) {
 		
 		System.out.println("Hello Get");
@@ -34,6 +37,8 @@ public class Movies {
 		return "Index";
 	}
 	
+//	@PreAuthorize is for method level security and the role give is admin role
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@GetMapping("/about")
 	public String About() {
 		
