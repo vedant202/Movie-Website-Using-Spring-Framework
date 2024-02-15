@@ -79,7 +79,6 @@ public class Movies {
 	
 	
 	
-	
 	@GetMapping("/movies")
 	@ResponseBody
 	public String getAllMovies() {

@@ -46,6 +46,7 @@ nav{
     height: 2.1rem;
     border-radius: 3px;
     padding-left: 8px;
+        border-radius: 17px;
 }
 
 .navsLink ul a{
