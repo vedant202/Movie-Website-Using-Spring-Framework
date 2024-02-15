@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 	<meta charset="ISO-8859-1">
 	<title>Movies Website</title>
@@ -21,17 +22,33 @@
 
 			<div class="navsLink">
 				<ul>
-					<li>home</li>
-					<li>about</li>
-					<li>contact</li>
+					<li><a href="/">Home</a></li>
+					<li><a href="/about">About</a></li>
+					<li><a href="/contact">Contact</a></li>
 				</ul>
 			</div>
 			
+			<div>
+				<input type="text" id="search" placeholder="Search Movie">
+				
+			</div>
+			
 			<div class="navsLink">
-				<ul>
-					<li>LogIN</li>
-					<li>SignIN</li>
+				
+					<ul  sec:authorize="!isAuthenticated()">
+					<li><a href="/login">login</a></li>
+					<li><a href="/signup">Signup</a></li>
 				</ul>
+					
+				 
+				
+				
+					<ul  sec:authorize="isAuthenticated()">
+					<li><a href="/logout">logout</a></li>
+					
+				</ul>
+					
+							
 			</div>
 			<div id="toggleBtn" class="toggleNav">
 				<img src="images/list.svg" />
@@ -41,11 +58,11 @@
 		</nav>
 		<div id="toggleMenue" class="toggleMenue">
 				<ul>
-					<li>home</li>
-					<li>about</li>
-					<li>contact</li>
-					<li>LogIN</li>
-					<li>SignIN</li>
+					<li>Home</li>
+					<li>About</li>
+					<li>Contact</li>
+					<li>Login</li>
+					<li>Signin</li>
 				</ul>
 			</div>
 
@@ -54,45 +71,8 @@
 
 	<main>
 		<div class="container">
-			<div class="cards">
-				<div class="card">
-					<div class="top"> Title of the card </div>
-					<div class="mid">Hi my name is vedant . I am 22 years old. And I love coding my own stuff
-						When using background-clip: text check that the contrast ratio between the background color and the color of the text placed over it is high enough that people experiencing low vision conditions will be able to read the content of the page.
-					</div>
-					<div class="foot">Footer Of the card</div>
-					<button class="cardBtn"> Show</button>
-				</div>
+			<div id="cards" class="cards">
 				
-				<div class="card">
-					<div class="top"> Title of the card </div>
-					<div class="mid">Hi my name is vedant . I am 22 years old. And I love coding my own stuff</div>
-					<div class="foot">Footer Of the card</div>
-					<button class="cardBtn">Show</button>
-				</div>
-				
-				<div class="card">
-					<div class="top"> Title of the card </div>
-					<div class="mid">Hi my name is vedant . I am 22 years old. And I love coding my own stuff</div>
-					<div class="foot">Footer Of the card</div>
-					<button class="cardBtn">Show</button>
-				</div>
-				
-				<div class="card">
-					<div class="top"> Title of the card </div>
-					<div class="mid">Hi my name is vedant . I am 22 years old. And I love coding my own stuff</div>
-					<div class="foot">Footer Of the card</div>
-					<button class="cardBtn">Show</button>
-				</div>
-				
-				<div class="card">
-					<div class="top"> Title of the card </div>
-					<div class="mid">Hi my name is vedant . I am 22 years old. And I love coding my own stuff</div>
-					<div class="foot">Footer Of the card</div>
-					
-					<button class="cardBtn">Show</button>
-				</div>
-
 			</div>
 
 		</div>

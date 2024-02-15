@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Movies Website</title>
+	<link rel="stylesheet" type="text/css" href="/css/login.css">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+
+
+<body>
+
+	<div class="container">
+
+		<div class="cards">
+			<div class="card">
+				<div class="top"> Register User </div>
+				<!--  showing error on invalid credentials -->
+					
+						<p class="error" id="error">
+							
+						</p>
+				
+					
+					<div class="error" id="onError">
+						
+					</div>
+				<div class="mid">
+					<form class="form-signin" method="post" action="/signup" onsubmit="return checkPassword()" >
+						<div class="row">
+							<div class="col1">
+									<label for="username" class="sr-only">First Name</label>
+							</div>
+							<div class="col2">
+								<input type="text" id="fname" name="fname" class="form-control"
+									placeholder="First Name" required autofocus>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col1">
+									<label for="username" class="sr-only">Last Name</label>
+							</div>
+							<div class="col2">
+								<input type="text" id="lname" name="lname" class="form-control"
+									placeholder="Last Name" required autofocus>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col1">
+									<label for="username" class="sr-only">Email Address</label>
+							</div>
+							<div class="col2">
+								<input type="email" id="email" name="email" class="form-control"
+									placeholder="Email Address" required autofocus>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col1">
+							<label for="password" class="sr-only">Password</label>
+							</div>
+							<div class="col2">
+							<input type="password" id="password" name="password" class="form-control"
+								placeholder="Password" required autocomplete="false">
+								</div>
+						</div>
+						
+						<div class="row">
+							<div class="col1">
+							<label for="password" class="sr-only">Confirm Password</label>
+							</div>
+							<div class="col2">
+							<input type="password" id="cpassword" name="cpassword" class="form-control"
+								placeholder="Confirm Password" required autocomplete="false">
+								</div>
+						</div>
+						<div class="row">
+						<button class="cardBtn"> signup </button>
+						<button class="cardBtn" onclick="window.location.href='/login'"> Login Page </button>
+						</div>
+
+					</form>
+
+				</div>
+
+
+
+			</div>
+		</div>
+
+	</div>
+
+<script src="/js/signup.js"></script>
+</body>
+
+</html>

@@ -21,10 +21,13 @@ public class Users {
 	@Column(columnDefinition = "TEXT")
 	private String password;
 	
+	@Column(columnDefinition = "varchar(255) default 'ROLE_USER'")
 	private String role;
 	
+	@Column(columnDefinition = "bit(1) default 1")
 	private boolean isActive;
 	
+	@Column(columnDefinition = "bit(1) default 0")
 	private boolean isDeleted;
 
 	

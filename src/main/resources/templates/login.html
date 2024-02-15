@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Movies Website</title>
+	<link rel="stylesheet" type="text/css" href="/css/login.css">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+
+
+<body>
+
+	<div class="container">
+
+		<div class="cards">
+			<div class="card">
+				<div class="top"> Login </div>
+				<!--  showing error on invalid credentials -->
+					<th:block th:if="${param.error}">
+						<p class="error">
+							Invalid Details
+						</p>
+					</th:block>
+					
+					<div class="error" id="onError">
+						
+					</div>
+				<div class="mid">
+					<form class="form-signin" method="post" action="/login">
+						<div class="row">
+							<div class="col1">
+							<label for="username" class="sr-only">Email Address</label>
+							</div>
+							<div class="col2">
+							<input type="text" id="username" name="username" class="form-control"
+								placeholder="Email Address" required autofocus>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col1">
+							<label for="password" class="sr-only">Password</label>
+							</div>
+							<div class="col2">
+							<input type="password" id="password"  name="password" class="form-control"
+								placeholder="Password" required autocomplete="false">
+								</div>
+						</div>
+						<div class="row">
+						<button class="cardBtn"> Login </button>
+						<button class="cardBtn" onclick="window.location.href='/signup'" > signup page </button>
+						</div>
+
+					</form>
+
+				</div>
+
+
+
+			</div>
+		</div>
+
+	</div>
+
+</body>
+
+</html>
