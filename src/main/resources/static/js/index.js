@@ -9,7 +9,7 @@
  let cardOverview1 = ``;
  
  
- fetch("/movies").then((data)=>data.json()).then(jData=>{
+ fetch("/v1/movies").then((data)=>data.json()).then(jData=>{
 	 console.log(jData);
 	 if(jData.length>0){
 		 cardsId1.innerHTML+=jData.map((i)=>{

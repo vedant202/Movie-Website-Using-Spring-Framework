@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +29,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 @Controller
+@RequestMapping("/v1/")
 public class Movies {
 	@Autowired
 	MovieService movie;
@@ -88,11 +90,14 @@ public class Movies {
 //	@PreAuthorize is for method level security and the role give is admin role
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@GetMapping("/about")
-	public String About() {
+	public String About(Principal p,Model m) {
 		
 		
 		System.out.println("Hello about");
-		
+		String email = p.getName();
+		System.out.println("Index Page , Email :- "+email);
+		Users u = usersServices.getUsersByEmail(email);
+		m.addAttribute("userFName", u.getFname()+" "+u.getLname());
 		
 		return "About";
 	}

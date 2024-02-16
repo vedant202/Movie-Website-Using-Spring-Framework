@@ -14,7 +14,7 @@ import com.MoviesWebsite.Entities.MovieEntity;
 import com.MoviesWebsite.Services.MovieService;
 import com.google.gson.Gson;
 
-@RequestMapping("/movie")
+@RequestMapping("/v1/movie")
 @RestController
 public class MovieSearchController {
 	

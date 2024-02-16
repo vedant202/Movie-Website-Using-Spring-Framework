@@ -21,7 +21,7 @@ const cardsId = document.getElementById("cards");
 	 clearTimeout(timeOut);
 	 timeOut= setTimeout(async()=>{
 		 console.log(e.target.value);
-		 let url = `/movie/search?title=${e.target.value}`;
+		 let url = `/v1/movie/search?title=${e.target.value}`;
 		 let response=await fetch(url,{
 			 method:"POST",
 			 
