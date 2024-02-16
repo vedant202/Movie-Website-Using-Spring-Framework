@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.Movie.Movie;
@@ -48,6 +49,15 @@ public class MovieServiceImpl implements MovieService{
 	public List<MovieEntity> gettingMovies() {
 		// Getting all movies from database
 		List<MovieEntity> allMovies =(List<MovieEntity>) movieRepository.findAllByOrderByReleaseDateDesc();
+		System.out.println("getting all movies");
+		System.out.println(allMovies);
+		return allMovies;
+	}
+	
+	@Override
+	public List<MovieEntity> gettingMovies(Pageable p) {
+		// Getting all movies from database
+		List<MovieEntity> allMovies =(List<MovieEntity>) movieRepository.findAllByOrderByReleaseDateDesc(p);
 		System.out.println("getting all movies");
 		System.out.println(allMovies);
 		return allMovies;

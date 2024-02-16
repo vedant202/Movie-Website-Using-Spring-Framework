@@ -54,3 +54,16 @@
     
 }
 
+.pageNumber{
+	text-align: center;
+	display: flex;
+	justify-content: center;
+}
+
+.pageNumber p{
+	padding: 20px;
+	color: white;
+	font-size: 20px;
+	cursor: pointer;
+	
+}

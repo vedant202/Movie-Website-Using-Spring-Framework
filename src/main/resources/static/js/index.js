@@ -4,15 +4,23 @@
 
  console.log("Hii from index");
  
- const cardsId1 = document.getElementById("cards");
+ 
+ 
+let pageLength = 0; 
+ 
+ 
+ function getAllMovies(pageNo=0){
+	 console.log("getAllMovies ",pageNo);
+	 const cardsId1 = document.getElementById("cards");
  let cardTitle1 = ``;
  let cardOverview1 = ``;
- 
- 
- fetch("/v1/movies").then((data)=>data.json()).then(jData=>{
+ let temp="";
+	 fetch("/v1/movies?page="+pageNo).then((data)=>data.json()).then(jData=>{
 	 console.log(jData);
+	 
 	 if(jData.length>0){
-		 cardsId1.innerHTML+=jData.map((i)=>{
+		 
+		 temp+=jData.map((i)=>{
 			 cardTitle1=i['title'];
 			 cardOverview1=i['overview'];
 			 
@@ -27,6 +35,7 @@
 			 
 			 return card;
 		 })
+		 cardsId1.innerHTML = temp;
 	 }else{
 		 cardsId1.innerHTML=`<h1>Nothing to Display</h1>`;
 	 }
@@ -34,4 +43,39 @@
 	 console.log(e);
 	 cardsId1.innerHTML=`<h1>Nothing to Display</h1>`;
  })
+ }
+ 
+ let pageNo=0;
+ 
+ let moviesSize = Number( document.getElementById("spanMovie").innerText.trim());
+ console.log("afaef",moviesSize/10,pageNo)
+ getAllMovies(pageNo);
+ 
+ 
+ 
+	  let next = document.getElementById("next");
+ next.addEventListener("click",(e)=>{
+	 pageNo = pageNo+1<moviesSize/10?pageNo+1:pageNo;
+	 
+	 console.log("Next clicked ",pageNo);
+	 if(pageNo<moviesSize/10){
+		 getAllMovies(pageNo);
+	 }
+	 
+ })
+ 
+  let prev = document.getElementById("prev");
+ prev.addEventListener("click",(e)=>{
+	 pageNo = pageNo-1>=0?pageNo-1:pageNo;
+	
+	 console.log("Next clicked ",pageNo);
+	 if(pageNo>=0){
+		  getAllMovies(pageNo);
+	 }
+	
+ })
+
+ 
+ 
+ 
  

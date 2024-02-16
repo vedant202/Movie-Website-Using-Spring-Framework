@@ -7,13 +7,13 @@
 	<title>Movies Website</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 
-	
 
 </head>
 
 <body>
 		
 	<section>
+		<span id="spanMovie" th:text="${session.movieSize}"></span>
 		<link rel="stylesheet" href="/css/index.css">
 
 	<main>
@@ -21,10 +21,16 @@
 			<div id="cards" class="cards">
 				
 			</div>
-
+			
+			<div  class="pageNumber">
+				<p  id="prev">previos</p>
+				<p id="next">next
+				</p>
+			</div>
+			
 		</div>
 	</main>
-<script src="/js/index.js"></script>
+<script th:inline="javascript" src="/js/index.js"></script>
 </section>
 </body>
 

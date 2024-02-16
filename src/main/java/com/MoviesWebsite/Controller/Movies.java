@@ -2,9 +2,13 @@ package com.MoviesWebsite.Controller;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
@@ -27,6 +31,8 @@ import com.MoviesWebsite.Services.UsersServices;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/v1/")
@@ -106,13 +112,16 @@ public class Movies {
 	
 	@GetMapping("/movies")
 	@ResponseBody
-	public String getAllMovies() {
+	public String getAllMovies(@RequestParam(defaultValue = "0") int page,HttpSession session) {
 //		String moviesData=movie.getAllMoviesData();
-		
+		System.out.println("getAllMovies page "+page);
+		Pageable pageRequest=PageRequest.of(page, 10);
 		
 		Gson gson = new Gson();
-		List<MovieEntity> movies = movie.gettingMovies();
+		List<MovieEntity> movies = movie.gettingMovies(pageRequest);
 		
+		session.setAttribute("movieSize", 20);
+//		Map<String,Object> temp = new HashMap();
 		
 //		return gson.toJson(movieListjson);
 		return gson.toJson(movies);
