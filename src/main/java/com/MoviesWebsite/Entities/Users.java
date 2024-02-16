@@ -1,10 +1,12 @@
 package com.MoviesWebsite.Entities;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Users {
@@ -12,15 +14,21 @@ public class Users {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	@NotNull
 	private String fname;
 	
+	@NotNull
 	private String lname;
 	
+	@NotNull
+	@Column(unique=true)
 	private String email;
 	
+	@NotNull
 	@Column(columnDefinition = "TEXT")
 	private String password;
 	
+	@NotNull
 	@Column(columnDefinition = "varchar(255) default 'ROLE_USER'")
 	private String role;
 	

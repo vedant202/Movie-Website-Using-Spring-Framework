@@ -1,5 +1,8 @@
 package com.MoviesWebsite.Services;
 
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,7 +17,7 @@ public class UsersServices implements UsersServiceInterface {
 	UsersRepository userRepo;
 	
 	@Override
-	public Users createUser(Users u) {
+	public Users createUser(Users u) throws SQLException {
 		// TODO Auto-generated method stub
 		System.out.println("User details :- "+u);
 		
@@ -24,9 +27,17 @@ public class UsersServices implements UsersServiceInterface {
 		u1.setEmail(u.getEmail());
 		u1.setPassword(new BCryptPasswordEncoder().encode(u.getPassword()));
 		u1.setRole("ROLE_USER");
+		Users savedUser=null;
+		try {
+			savedUser= userRepo.save(u1);
+		}
+		catch(Exception e) {
+			System.out.println("Throwingggggg new exception.............");
+			e.printStackTrace();
+			throw new SQLException(e.getMessage());
+		}
 		
-		
-		 Users savedUser= userRepo.save(u1);
+		 
 		 
 		 
 		 
@@ -34,4 +45,18 @@ public class UsersServices implements UsersServiceInterface {
 		return savedUser;
 	}
 	
+	
+	public Users getUsersByEmail(String email) {
+		Users u=null;
+		if(!email.isEmpty()) {
+			try {
+				u = userRepo.findByEmail(email);
+			}catch(Exception e) {
+				System.out.println("Exception while fetching email");
+				e.printStackTrace();
+			}
+			
+		}
+		return u;
+	}
 }

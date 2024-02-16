@@ -1,5 +1,6 @@
 package com.MoviesWebsite.Controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,10 +39,14 @@ public class Movies {
 	@GetMapping("/")
 //	@PreAuthorize("hasAuthority('ROLE_USER')")  this is only for user role and this is method level security
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
-	public String hello(Model model) {
-		
+	public String hello(Principal p,Model model) {
 		System.out.println("Hello Get");
+		String email = p.getName();
+		System.out.println("Index Page , Email :- "+email);
+		Users u = usersServices.getUsersByEmail(email);
+		System.out.println(u);
 		
+		model.addAttribute("userFName", u.getFname()+" "+u.getLname());
 		return "Index";
 	}
 	
@@ -58,9 +63,24 @@ public class Movies {
 	
 	
 	@PostMapping("/signup")
-	public String signup(@ModelAttribute("user") Users users) {
+	public String signup(@ModelAttribute("user") Users users,Model model) {
 		System.out.println(users);
-		 Users u= usersServices.createUser(users);
+		boolean error = false;
+		try {
+			 Users u= usersServices.createUser(users);
+		}catch(Exception e) {
+			error =true;
+			System.out.println("catchingg sel expception ...................");
+			model.addAttribute("error", "Error check email and password");
+			
+		}
+		 System.out.println("CheckingUserNullValues "+users);
+		 
+			 
+		 if(error) {
+			 System.out.println("Returning signup page");
+			 return "signup";
+		 }
 		 
 		return "redirect:/login";
 	}

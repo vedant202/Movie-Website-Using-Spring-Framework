@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:replace="base::layout(~{::section})">
 
 <head>
 	<title>Movies Website</title>
-	<link rel="stylesheet" type="text/css" href="/css/login.css">
+	
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
 
 
 <body>
-
+	<section>
+		<link rel="stylesheet" type="text/css" href="/css/login.css">
 	<div class="container">
 
 		<div class="cards">
@@ -61,6 +63,7 @@
 		</div>
 
 	</div>
+	</section>
 
 </body>
 
