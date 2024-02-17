@@ -52,11 +52,18 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf().disable()
-		.authorizeHttpRequests().requestMatchers("/css/**","/js/**","/images/**","/v1/signup").permitAll()
+		.authorizeHttpRequests().requestMatchers("/css/**","/js/**","/images/**","/v1/signup","/v1/login").permitAll()
 		.requestMatchers("/v1").hasAnyRole("USER","ADMIN")
 		.requestMatchers("/admin").hasRole("ADMIN")
 		.anyRequest().authenticated()
 		.and()
+		.oauth2Login()
+		.loginPage("/v1/login")
+		
+		.successHandler(successhandler)
+	
+		.and()
+		
 		.formLogin().loginPage("/v1/login").loginProcessingUrl("/v1/login")
 		.successHandler(successhandler)
 		
@@ -65,7 +72,10 @@ public class SecurityConfig {
 		.and()
 		.logout()
 		.logoutSuccessUrl("/v1/login")
-		.permitAll();
+		.permitAll()
+		
+		
+		;
 		
 		
 		

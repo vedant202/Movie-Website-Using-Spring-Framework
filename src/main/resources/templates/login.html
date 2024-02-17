@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:replace="base::layout(~{::section})">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	th:replace="base::layout(~{::section})">
 
 <head>
 	<title>Movies Website</title>
-	
+
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
 
@@ -12,57 +12,62 @@
 <body>
 	<section>
 		<link rel="stylesheet" type="text/css" href="/css/login.css">
-	<div class="container">
+		<div class="container">
 
-		<div class="cards">
-			<div class="card">
-				<div class="top"> Login </div>
-				<!--  showing error on invalid credentials -->
+			<div class="cards">
+				<div class="card">
+					<div class="top"> Login </div>
+					<!--  showing error on invalid credentials -->
 					<th:block th:if="${param.error}">
 						<p class="error">
 							Invalid Details
 						</p>
 					</th:block>
-					
+
 					<div class="error" id="onError">
-						
+
 					</div>
-				<div class="mid">
-					<form class="form-signin" method="post" action="/v1/login">
-						<div class="row">
-							<div class="col1">
-							<label for="username" class="sr-only">Email Address</label>
-							</div>
-							<div class="col2">
-							<input type="text" id="username" name="username" class="form-control"
-								placeholder="Email Address" required autofocus>
-							</div>
-						</div>
+					<div>
+						<h2><a th:href="@{/oauth2/authorization/google}">Login with Google</a></h2>
+					</div>
 
-						<div class="row">
-							<div class="col1">
-							<label for="password" class="sr-only">Password</label>
-							</div>
-							<div class="col2">
-							<input type="password" id="password"  name="password" class="form-control"
-								placeholder="Password" required autocomplete="false">
+
+					<div class="mid">
+						<form class="form-signin" method="post" action="/v1/login">
+							<div class="row">
+								<div class="col1">
+									<label for="username" class="sr-only">Email Address</label>
 								</div>
-						</div>
-						<div class="row">
-						<button class="cardBtn"> Login </button>
-						<button class="cardBtn" onclick="window.location.href='/signup'" > signup page </button>
-						</div>
+								<div class="col2">
+									<input type="text" id="username" name="username" class="form-control"
+										placeholder="Email Address" required autofocus>
+								</div>
+							</div>
 
-					</form>
+							<div class="row">
+								<div class="col1">
+									<label for="password" class="sr-only">Password</label>
+								</div>
+								<div class="col2">
+									<input type="password" id="password" name="password" class="form-control"
+										placeholder="Password" required autocomplete="false">
+								</div>
+							</div>
+							<div class="row">
+								<button class="cardBtn"> Login </button>
+								<button class="cardBtn" onclick="window.location.href='/signup'"> signup page </button>
+							</div>
+
+						</form>
+
+					</div>
+
+
 
 				</div>
-
-
-
 			</div>
-		</div>
 
-	</div>
+		</div>
 	</section>
 
 </body>

@@ -10,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +31,7 @@ import com.MoviesWebsite.Entities.Users;
 import com.MoviesWebsite.Services.ExternalMovieService;
 import com.MoviesWebsite.Services.MovieService;
 import com.MoviesWebsite.Services.UsersServices;
+import com.MoviesWebsite.config.CustomUserDetailsService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -49,12 +53,27 @@ public class Movies {
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
 	public String hello(Principal p,Model model) {
 		System.out.println("Hello Get");
-		String email = p.getName();
-		System.out.println("Index Page , Email :- "+email);
-		Users u = usersServices.getUsersByEmail(email);
-		System.out.println(u);
 		
-		model.addAttribute("userFName", u.getFname()+" "+u.getLname());
+		SecurityContext securityContext= SecurityContextHolder.getContext();
+		 System.out.println("securityContext.getAuthentication().getPrincipal() "+securityContext.getAuthentication().getPrincipal());
+		 if(securityContext.getAuthentication().getPrincipal() instanceof DefaultOAuth2User) {
+			 
+			 System.out.println((DefaultOAuth2User) securityContext.getAuthentication().getPrincipal());
+			 DefaultOAuth2User auth2User= (DefaultOAuth2User) securityContext.getAuthentication().getPrincipal();
+			 model.addAttribute("userFName", auth2User.getAttribute("name"));
+		 }else {
+			 String email = p.getName();
+				System.out.println("Index Page , Email :- "+email);
+				Users u = usersServices.getUsersByEmail(email);
+				System.out.println(u);
+				
+				model.addAttribute("userFName", u.getFname()+" "+u.getLname()); 
+		 }
+		
+		
+		
+		
+		 
 		return "Index";
 	}
 	
@@ -62,6 +81,8 @@ public class Movies {
 	public String login() {
 		return "login";
 	}
+	
+	
 	
 	@GetMapping("/signup")
 	public String signup() {
