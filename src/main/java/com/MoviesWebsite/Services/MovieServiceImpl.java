@@ -62,6 +62,7 @@ public class MovieServiceImpl implements MovieService{
 		System.out.println(allMovies);
 		return allMovies;
 	}
+	
 
 	@Override
 	public MovieEntity addMovie(MovieEntity movie) {
@@ -129,6 +130,24 @@ public class MovieServiceImpl implements MovieService{
 		
 		
 		
+	}
+
+	@Override
+	public List<MovieEntity> gettingMoviesSortByPopularity() {
+		// Getting all movies from database and soritng them by popularity
+			List<MovieEntity> allMovies =(List<MovieEntity>) movieRepository.findAllByOrderByPopularityDesc();
+			System.out.println("getting all movies and sorting them by popularity");
+			System.out.println(allMovies);
+			return allMovies;
+	}
+
+	@Override
+	public List<MovieEntity> gettingMoviesSortByPopularity(Pageable p) {
+		// Getting all movies from database and soritng them by popularity
+			List<MovieEntity> allMovies =(List<MovieEntity>) movieRepository.findAllByOrderByPopularityDesc(p);
+			System.out.println("getting all movies and sorting them by popularity");
+			System.out.println(allMovies);
+			return allMovies;
 	}
 
 }

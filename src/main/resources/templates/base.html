@@ -20,8 +20,12 @@
 				</ul>
 			</div>
 			
-			<div>
+			<div class="searchCont">
 				<input type="text" id="search" placeholder="Search Movie">
+				<button class="sortBy" id="sortBy" type="submit">
+        <img src="/images/sortBy.png"  alt="buttonpng" border="0" />
+      </button>
+      
 				
 			</div>
 			
@@ -48,6 +52,11 @@
 			
 			
 		</nav>
+		<hr style="
+    background-color: white;
+    /* width: 32px; */
+    height: 0.3px;
+">
 		<div id="toggleMenue" class="toggleMenue">
 				<ul>
 					<li><a href="/v1/">Home</a></li>
@@ -57,6 +66,18 @@
 					<li><a href="/v1/signup">Signup</a></li>
 				</ul>
 			</div>
+			
+			<div id="dropdown-menu" class="dropdown-menu dropdown-menu-right" >
+           <ul class="category_filters" >
+            <li >
+             <input class="cat_type category-input" data-label="All" onchange="handleRadioChange(this)" id="sortByReleaseDate" value="sortByReleaseDate" name="radios" type="radio" checked ><label for="all" >Release Date</label>
+            </li>
+            <li >
+             <input type="radio" name="radios" id="sortByPopularity" onchange="handleRadioChange(this)" value="sortByPopularity" ><label class="category-label" for="sortByPopularity" >Popularity</label>
+            </li>
+            
+           </ul>
+        </div>
 
 
 	</header>

@@ -14,6 +14,10 @@ public interface MovieService {
 	
 	List<MovieEntity> gettingMovies(Pageable p);
 	
+	List<MovieEntity> gettingMoviesSortByPopularity();
+	
+	List<MovieEntity> gettingMoviesSortByPopularity(Pageable p);
+	
 	MovieEntity addMovie(MovieEntity movie);
 	
 	Iterable<MovieEntity> addMovies(Iterable<MovieEntity> movies);

@@ -16,6 +16,10 @@ public interface MovieRepository extends JpaRepository <MovieEntity, Integer>{
 	
 	List<MovieEntity> findAllByOrderByReleaseDateDesc(Pageable p);
 	
+	List<MovieEntity> findAllByOrderByPopularityDesc();
+	
+	List<MovieEntity> findAllByOrderByPopularityDesc(Pageable p);
+	
 	@Query(value = "select * from movie_entity order by vote_average desc",nativeQuery = true)
 	List<MovieEntity> findByVoteCountDesc();
 }

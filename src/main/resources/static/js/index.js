@@ -59,6 +59,7 @@ let pageLength = 0;
 	 
 	 console.log("Next clicked ",pageNo);
 	 if(pageNo<moviesSize/10){
+		 
 		 getAllMovies(pageNo);
 	 }
 	 

@@ -3,6 +3,8 @@ package com.MoviesWebsite.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.MoviesWebsite.Entities.MovieEntity;
 import com.MoviesWebsite.Services.MovieService;
 import com.google.gson.Gson;
+
+import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/v1/movie")
 @RestController
@@ -51,6 +55,19 @@ public class MovieSearchController {
 		
 		
 		return gson.toJson(m);
+	}
+	
+	@PostMapping("/sort/popularity")
+	@ResponseBody
+	public String getMovieByPopularity(@RequestParam(defaultValue = "0") int page, HttpSession session) {
+		System.out.println("getMovieByPopularity page "+page);
+		Pageable p = PageRequest.of(page, 10);
+		Gson gson = new Gson();
+		
+		 List<MovieEntity> moviesByPop= movie.gettingMoviesSortByPopularity(p);
+		 session.setAttribute("movieSize", moviesByPop.size());
+		 
+		 return gson.toJson(moviesByPop);
 	}
 	
 }

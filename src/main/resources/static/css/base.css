@@ -117,3 +117,49 @@ nav{
 .toggleMenue ul li:hover{
 	color: darksalmon;
 }
+
+.searchCont{
+	    display: flex;
+    align-items: center;
+    justify-items: center;
+}
+
+.sortBy {
+  border: none;
+  cursor: pointer;
+  appearance: none;
+      margin-left: 10px;
+  
+}
+
+.sortBy{
+  transition: transform 0.7s ease-in-out;
+}
+
+.sortBy:hover {
+  transform: rotate(360deg);
+}
+
+.sortBy img {
+  width: 20px;
+  height: 20px;
+}
+
+.active{
+  display: block;
+}
+
+.dropdown-menu{
+	    background: white;
+    width: 13rem;
+    position: absolute;
+    right: 269px;
+    top: 76px;
+    display: none;
+    z-index: 20;
+        border-radius: 7px;
+}
+
+.dropdown-menu li{
+	    list-style: none;
+}
