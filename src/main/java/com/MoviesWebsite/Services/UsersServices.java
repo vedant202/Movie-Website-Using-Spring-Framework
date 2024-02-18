@@ -48,15 +48,18 @@ public class UsersServices implements UsersServiceInterface {
 	
 	public Users getUsersByEmail(String email) {
 		Users u=null;
-		if(!email.isEmpty()) {
-			try {
-				u = userRepo.findByEmail(email);
-			}catch(Exception e) {
-				System.out.println("Exception while fetching email");
-				e.printStackTrace();
+		if(email!=null) {
+			if(!email.isEmpty()) {
+				try {
+					u = userRepo.findByEmail(email);
+				}catch(Exception e) {
+					System.out.println("Exception while fetching email");
+					e.printStackTrace();
+				}
+				
 			}
-			
 		}
+		
 		return u;
 	}
 }

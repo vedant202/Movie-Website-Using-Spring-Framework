@@ -49,18 +49,19 @@ public class Movies {
 	
 	
 	@GetMapping("/")
-//	@PreAuthorize("hasAuthority('ROLE_USER')")  this is only for user role and this is method level security
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+//	@PreAuthorize("hasAnyRole('ROLE_USER')")  this is only for user role and this is method level security
+//	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_USER','OIDC_USER','OAUTH2_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER') or hasAnyAuthority('OIDC_USER','OAUTH2_USER')")
 	public String hello(Principal p,Model model) {
 		System.out.println("Hello Get");
 		
 		SecurityContext securityContext= SecurityContextHolder.getContext();
-		 System.out.println("securityContext.getAuthentication().getPrincipal() "+securityContext.getAuthentication().getPrincipal());
+		 System.out.println("index securityContext.getAuthentication().getPrincipal() "+securityContext.getAuthentication().getPrincipal());
 		 if(securityContext.getAuthentication().getPrincipal() instanceof DefaultOAuth2User) {
 			 
 			 System.out.println((DefaultOAuth2User) securityContext.getAuthentication().getPrincipal());
 			 DefaultOAuth2User auth2User= (DefaultOAuth2User) securityContext.getAuthentication().getPrincipal();
-			 model.addAttribute("userFName", auth2User.getAttribute("name"));
+			 model.addAttribute("userFName", auth2User.getAttribute("name")==null?auth2User.getAttribute("login"):auth2User.getAttribute("name"));
 		 }else {
 			 String email = p.getName();
 				System.out.println("Index Page , Email :- "+email);

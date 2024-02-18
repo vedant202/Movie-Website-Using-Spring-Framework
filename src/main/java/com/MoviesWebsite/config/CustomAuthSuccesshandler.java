@@ -30,10 +30,15 @@ public class CustomAuthSuccesshandler implements AuthenticationSuccessHandler {
 			Authentication authentication) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		System.out.println(authentication.getPrincipal());
+		 Set<String> authoritiesRoles= AuthorityUtils.authorityListToSet(authentication.getAuthorities());
+		 System.out.println("oauth authoritiesRoles :- "+authoritiesRoles);
 		if(authentication.getPrincipal() instanceof DefaultOAuth2User) {
 			DefaultOAuth2User userDetails=(DefaultOAuth2User)authentication.getPrincipal();
-			String email = userDetails.getAttribute("email");
-			String name=userDetails.getAttribute("name");
+			String email = userDetails.getAttribute("email")==null?userDetails.getAttribute("login")+"@gmail.com":userDetails.getAttribute("email");
+			String name=userDetails.getAttribute("email")==null?userDetails.getAttribute("login"):userDetails.getAttribute("email");
+			
+			
+			
 			System.out.println("Oauth2 google email :- "+email+" and name :- "+name);
 			Users getUserByEmail = userServices.getUsersByEmail(email);
 			if(getUserByEmail == null) {
@@ -53,14 +58,13 @@ public class CustomAuthSuccesshandler implements AuthenticationSuccessHandler {
 			}
 			
 			/* response.sendRedirect("/"); */
-			new DefaultRedirectStrategy().sendRedirect(request, response, "/");
+//			new DefaultRedirectStrategy().sendRedirect(request, response, "/");
 		}
-		 Set<String> authoritiesRoles= AuthorityUtils.authorityListToSet(authentication.getAuthorities());
 		 
-		 if(authoritiesRoles.contains("ROLE_ADMIN")) {
+		 if(authoritiesRoles.contains("ROLE_ADMIN") ) {
 			 response.sendRedirect("/admin");
 		 }
-		 if(authoritiesRoles.contains("ROLE_USER")) {
+		 if(authoritiesRoles.contains("ROLE_USER") || authoritiesRoles.contains("OIDC_USER") || authoritiesRoles.contains("OAUTH2_USER")) {
 			 response.sendRedirect("/v1/");
 		 }
 	}
