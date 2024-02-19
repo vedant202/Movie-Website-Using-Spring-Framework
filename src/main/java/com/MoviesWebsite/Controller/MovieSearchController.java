@@ -70,4 +70,17 @@ public class MovieSearchController {
 		 return gson.toJson(moviesByPop);
 	}
 	
+	@PostMapping("/sort/VoteCount")
+	@ResponseBody
+	public String getMovieByVoteCount(@RequestParam(defaultValue = "0") int page, HttpSession session) {
+		System.out.println("getMovieByVoteCount page "+page);
+		Pageable p = PageRequest.of(page, 10);
+		Gson gson = new Gson();
+		
+		 List<MovieEntity> moviesByPop= movie.gettingMoviesSortByVoteCount(p);
+		 session.setAttribute("movieSize", moviesByPop.size());
+		 
+		 return gson.toJson(moviesByPop);
+	}
+	
 }

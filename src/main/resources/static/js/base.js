@@ -35,6 +35,11 @@ async function  handleRadioChange(e){
 		 url = "/v1/movie/sort/popularity?page="+pageNo;
 		 method = "POST";
 	}
+	/*sortByVoteCount*/
+	else if(e.value.trim()=="sortByVoteCount"){
+		url = "/v1/movie/sort/VoteCount?page="+pageNo;
+		 method = "POST";
+	}
 	else{
 		url = "/v1/movies?page="+pageNo;
 		method = "GET";
