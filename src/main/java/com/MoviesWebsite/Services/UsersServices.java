@@ -2,6 +2,8 @@ package com.MoviesWebsite.Services;
 
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -45,6 +47,19 @@ public class UsersServices implements UsersServiceInterface {
 		return savedUser;
 	}
 	
+
+	public List<Users> getUsersWithoutPassword(){
+		List<Users> usersList =null;
+		try {
+			usersList = userRepo.findAllWithoutPass();
+			System.out.println("checking userslist and getUsersWithoutPassword "+usersList);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return usersList;
+		
+	}
 	
 	public Users getUsersByEmail(String email) {
 		Users u=null;
