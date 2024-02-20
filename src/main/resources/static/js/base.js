@@ -1,11 +1,8 @@
 /**
  * 
  */
+ 
 
-
-const cardsId = document.getElementById("cards");
- let cardTitle = ``;
- let cardOverview = ``;
 
  console.log("Hii from base");
  const toggleBtn = document.getElementById("toggleBtn");
@@ -26,69 +23,18 @@ sortBy.addEventListener('click',(e)=>{
 });
 
 
-async function  handleRadioChange(e){
-	console.log("Radio changed ",e.value);
-	let pageNo=0;
-	let url ="";
-	let method = "GET";
-	if(e.value.trim()=="sortByPopularity"){
-		 url = "/v1/movie/sort/popularity?page="+pageNo;
-		 method = "POST";
-	}
-	/*sortByVoteCount*/
-	else if(e.value.trim()=="sortByVoteCount"){
-		url = "/v1/movie/sort/VoteCount?page="+pageNo;
-		 method = "POST";
-	}
-	else{
-		url = "/v1/movies?page="+pageNo;
-		method = "GET";
-		
-	}
-	 let data= await fetch(url,{
-		method:method
-	});
-	
-	let movies = await data.json();
-	
-	cardsId.innerHTM=``;
-				let cardsInnerHTML="";
-		 if(movies.length>0){
-			 
-				 cardsInnerHTML+=movies.map((i)=>{
-					 console.log(i);
-					 cardTitle=i['title'];
-					 cardOverview=i['overview'];
-					 card = `<div class="card">
-							<div class="top"> ${cardTitle} </div>
-							<div class="mid">
-							${cardOverview.length>100?cardOverview.slice(0,100)+'...':cardOverview}
-							</div>
-							<div class="foot">Average Votes :- ${i['vote_average']}</div>
-							
-						</div>`;
-						
-						return card;
-				 });
-				
-		 }else{
-			 cardsInnerHTML="<h2>No Results Found</h2>"
-		 }
-		  
-		 document.getElementById("cards").innerHTML = cardsInnerHTML;
-	
-	
-	
+
+let searchCont = document.getElementById("searchCont");
+if(window.location.href!=="http://localhost:8080/v1/"){
+	searchCont.style.display='none';
+}else{
+	searchCont.style.display='flex';
 }
-
-
-
-
-
  
  let search= document.getElementById("search");
  let timeOut;
  search.addEventListener("input",(e)=>{
+	 const cardsId = document.getElementById("cards");
 	 clearTimeout(timeOut);
 	 timeOut= setTimeout(async()=>{
 		 console.log(e.target.value);
@@ -129,4 +75,42 @@ async function  handleRadioChange(e){
 	 
 	 
  });
+ 
+ 
+ 
+ 
+/* let pageNo=0;
+ 
+ getAllMovies(pageNo);
+ let moviesSize = Number( document.getElementById("spanMovie").innerText.trim());
+ console.log("afaef",moviesSize/10,pageNo)
+ 
+ 
+ 
+	  let next = document.getElementById("next");
+ next.addEventListener("click",(e)=>{
+	 pageNo = pageNo+1<moviesSize/10?pageNo+1:pageNo;
+	 
+	 console.log("Next clicked ",pageNo);
+	 if(pageNo<moviesSize/10){
+		 
+		 getAllMovies(pageNo);
+	 }
+	 
+ })
+ 
+  let prev = document.getElementById("prev");
+ prev.addEventListener("click",(e)=>{
+	 pageNo = pageNo-1>=0?pageNo-1:pageNo;
+	
+	 console.log("Next clicked ",pageNo);
+	 if(pageNo>=0){
+		  getAllMovies(pageNo);
+	 }
+	
+ })
+
+ */
+ 
+ 
  

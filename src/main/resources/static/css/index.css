@@ -9,12 +9,12 @@
 
 .card{
 	    border: red 1px solid;
-    width: 21rem;
+    width: 72rem;
     padding: 10px;
     margin-bottom: 20px;
         background-color: #211e1e;
     z-index: 10;
-    border: none;
+    border: 1px solid;
     border-radius: 10px;
 }
 
@@ -28,7 +28,7 @@
 	.cards{
 		color: white;
 	    display: flex;
-	flex-direction: row;
+	flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-evenly;
 		flex-direction: row;
