@@ -90,13 +90,13 @@ async function getAllMovies(url, pageNo = 0, method = "GET") {
 		if (!i.src.includes("2")) {
 			console.log("In if")
 			i.src = "/images/like 2.png";
-			document.getElementById("count"+movieId).innerText = Number(document.getElementById("count"+movieId).innerText) + 1;
-			handleLikes(movieId, Number(document.getElementById("count"+movieId).innerText),document.getElementById("count"+movieId));
+/*			document.getElementById("count"+movieId).innerText = Number(document.getElementById("count"+movieId).innerText) + 1;
+*/			handleLikes(movieId, Number(document.getElementById("count"+movieId).innerText),document.getElementById("count"+movieId));
 			
 		} else {
 			i.src = "/images/like.png";
-			Number(document.getElementById("count"+movieId).innerText) > 0 ? document.getElementById("count"+movieId).innerText = Number(document.getElementById("count"+movieId).innerText) - 1 : document.getElementById("count"+movieId).innerText = document.getElementById("count"+movieId).innerText;
-			handleLikes(movieId, Number(document.getElementById("count"+movieId).innerText),document.getElementById("count"+movieId));
+/*			Number(document.getElementById("count"+movieId).innerText) > 0 ? document.getElementById("count"+movieId).innerText = Number(document.getElementById("count"+movieId).innerText) - 1 : document.getElementById("count"+movieId).innerText = document.getElementById("count"+movieId).innerText;
+*/			handleLikes(movieId, Number(document.getElementById("count"+movieId).innerText),document.getElementById("count"+movieId));
 			}
 
 

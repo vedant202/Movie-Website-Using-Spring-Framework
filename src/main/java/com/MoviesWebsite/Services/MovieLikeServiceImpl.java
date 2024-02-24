@@ -109,8 +109,10 @@ public class MovieLikeServiceImpl implements MovieLikesService {
 		 });
 		 if(movieEntity.isPresent()) {
 			 counts = movieLikesRepo.findByUsersIdAndMovieId(user,movieEntity.get()).isPresent()?
-					 movieLikesRepo.findByUsersIdAndMovieId(user,movieEntity.get()).get().getCount():0;
-		 }else {
+					 movieLikesRepo.findByUsersIdAndMovieId(user,movieEntity.get()).get().getCount():movieLikesRepo.findByMovieId(movieEntity.get()).get().getCount();
+			 System.out.println("Returning count value so checking movie count "+counts);
+		 }
+		 else {
 			 counts = 0;
 		 }
 		 return counts;
