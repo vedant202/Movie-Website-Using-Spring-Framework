@@ -67,3 +67,24 @@
 	cursor: pointer;
 	
 }
+.wrapper{
+	display: flex;
+	align-items: center;
+	
+}
+.foot{
+	padding-right: 20px;
+}
+.likes{
+	display: flex;
+	align-items: center;
+}
+.likes img{
+	    width: 29px;
+    height: 26px;
+    cursor: pointer;
+    display:flex;
+    align-items: center;
+	padding-right: 10px;
+	
+}

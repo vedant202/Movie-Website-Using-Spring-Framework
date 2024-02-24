@@ -7,9 +7,37 @@
 </head>
 <body>
 	<section>
+		<link rel="stylesheet" href="/css/admin.css">
 		<h1 style="color: white;">Admin Page</h1>
 		<div>
-			
+			<div class="serach_class">
+				<label for="Field">Field : </label>
+				<select  id="filter-field">
+    <option></option>
+    <option value="Id">Id</option>
+    <option value="FirstName">First Name</option>
+    <option value="LastName">Last Name</option>
+    <option value="Email">Email</option>
+    <option value="Active">Active</option>
+    <option value="Deleted">Deleted</option>
+    <option value="Role">Role</option>
+    
+  </select>
+
+<label for="Type">Type : </label>
+  <select id="filter-type">
+    <option value="=">=</option>
+    <option value="<"><</option>
+    <option value="<="><=</option>
+    <option value=">">></option>
+    <option value=">=">>=</option>
+    <option value="!=">!=</option>
+    <option value="like">like</option>
+  </select>
+  
+  <label for="Value">Value : </label>
+				<input type="text" id="searchUsers" placeholder="Search" class="searchUsers"  />
+			</div>
 			<div class="users" id="users"></div>
 		</div>
 		

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -27,12 +28,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.Movie.Movie;
 import com.Movie.MovieResults;
 import com.MoviesWebsite.Entities.MovieEntity;
+import com.MoviesWebsite.Entities.MovieLikes;
 import com.MoviesWebsite.Entities.Users;
 import com.MoviesWebsite.Services.ExternalMovieService;
+import com.MoviesWebsite.Services.MovieLikeServiceImpl;
 import com.MoviesWebsite.Services.MovieService;
 import com.MoviesWebsite.Services.UsersServices;
 import com.MoviesWebsite.config.CustomUserDetailsService;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -46,6 +51,9 @@ public class Movies {
 	
 	@Autowired
 	UsersServices usersServices;
+	
+	@Autowired
+	MovieLikeServiceImpl likeService;
 	
 	
 	@GetMapping("/")
@@ -134,25 +142,62 @@ public class Movies {
 	
 	@GetMapping("/movies")
 	@ResponseBody
-	public String getAllMovies(@RequestParam(defaultValue = "0") int page,HttpSession session) {
-//		String moviesData=movie.getAllMoviesData();
+	public String getAllMovies(@RequestParam(defaultValue = "0") int page,Principal p,HttpSession session) {
 		System.out.println("getAllMovies page "+page);
 		Pageable pageRequest=PageRequest.of(page, 10);
 		
 		Gson gson = new Gson();
 		List<MovieEntity> movies = movie.gettingMovies(pageRequest);
 		
-		session.setAttribute("movieSize", 20);
-//		Map<String,Object> temp = new HashMap();
+		List<MovieLikes> allMoviesLikes=likeService.getAllMovieLikes();
 		
-//		return gson.toJson(movieListjson);
-		return gson.toJson(movies);
+		JsonArray jsonArray = new JsonArray();
+		
+		
+		movies.stream().forEach((i)->{
+			JsonObject jObject = new JsonObject();
+			jObject.addProperty("id", i.getId());
+			jObject.addProperty("title", i.getTitle());
+			jObject.addProperty("adult", i.isAdult());
+			jObject.addProperty("backdrop_path", i.getBackdrop_path());
+			jObject.addProperty("original_language", i.getOriginal_language());
+			jObject.addProperty("original_title", i.getOriginal_title());
+			jObject.addProperty("overview", i.getOverview());
+			jObject.addProperty("popularity", i.getPopularity());
+			jObject.addProperty("poster_path", i.getPoster_path());
+			jObject.addProperty("releaseDate", i.getRelease_date().toString());
+			jObject.addProperty("vote_average", i.getPopularity());
+			jObject.addProperty("vote_count", i.getVote_count());
+			Optional<MovieLikes> like=allMoviesLikes.stream().filter(l->l.getMovieId().getId()== i.getId()).findFirst();
+			like.ifPresentOrElse((pre)->{
+				jObject.addProperty("likeCount", pre.getCount());
+				Optional<Users> u = pre.getUsers_id().stream().filter(u1->u1.getEmail().equalsIgnoreCase(p.getName())).findFirst();
+				u.ifPresentOrElse((check)->{
+					jObject.addProperty("userLiked", true);
+				}, ()->{
+					jObject.addProperty("userLiked", false);
+				});
+				
+			},()->{
+				jObject.addProperty("likeCount", 0);
+				jObject.addProperty("userLiked", false);
+			});
+			
+			jsonArray.add(gson.fromJson(jObject.toString(), JsonElement.class));
+			
+		});
+		
+		session.setAttribute("movieSize", 20);
+		
+		
+//		return gson.toJson(movies);
+		return gson.toJson(jsonArray);
 	}
+	
 	
 	@GetMapping("/getAndSaveMoviesFromAPI")
 	@ResponseBody
 	public String getAllMoviesfromExtAPI() {
-//		String moviesData=movie.getAllMoviesData();
 		
 		
 		Gson gson = new Gson();
@@ -161,7 +206,6 @@ public class Movies {
 		List<MovieEntity> movies = movie.gettingMovies();
 		
 		
-//		return gson.toJson(movieListjson);
 		return gson.toJson(movies);
 	}
 }

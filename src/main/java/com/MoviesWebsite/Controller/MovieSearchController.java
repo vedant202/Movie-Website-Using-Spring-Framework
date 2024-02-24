@@ -1,5 +1,6 @@
 package com.MoviesWebsite.Controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,14 +8,19 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.MoviesWebsite.Entities.MovieEntity;
+import com.MoviesWebsite.Entities.Users;
+import com.MoviesWebsite.Services.MovieLikeServiceImpl;
 import com.MoviesWebsite.Services.MovieService;
+import com.MoviesWebsite.Services.UsersServices;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -25,6 +31,11 @@ public class MovieSearchController {
 	@Autowired
 	MovieService movie;
 	
+	@Autowired
+	UsersServices userService;
+	
+	@Autowired
+	MovieLikeServiceImpl movieLikesServiceImpl;
 	
 	@GetMapping
 	@ResponseBody
@@ -40,6 +51,27 @@ public class MovieSearchController {
 		
 		return gson.toJson(m);
 	}
+	
+	
+	
+	@PostMapping("/Setlike")
+	@ResponseBody
+	public int likesController(@RequestBody Object req,Principal p) {
+		System.out.println(req);
+		Gson gson = new Gson();
+		JsonObject jobj = gson.toJsonTree(req).getAsJsonObject();
+		System.out.println("Coverting req object to json object "+jobj);
+		System.out.println(p.getName());
+		
+		 Users user= userService.getUsersByEmail(p.getName());
+		 
+		 System.out.println("User is :- "+user);
+		 int counts = movieLikesServiceImpl.addMovieLike(user, jobj.get("id").getAsInt());
+		 
+		return counts;
+		
+	}
+	
 	
 	@PostMapping("/search")
 	@ResponseBody

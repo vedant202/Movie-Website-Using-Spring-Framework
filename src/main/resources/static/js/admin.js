@@ -2,6 +2,24 @@
  * 
  */
 
+const searchUsers = document.getElementById("searchUsers");
+const filterField = document.getElementById("filter-field");
+const filterType = document.getElementById("filter-type");
+
+let timeOutId;
+searchUsers.addEventListener('input',(e)=>{
+	clearTimeout(timeOutId);
+	console.log(filterField.value);
+	if(filterField.value){
+		timeOutId = setTimeout(()=>{
+		
+		console.log(e.target.value);
+	table.setFilter(filterField.value,filterType.value,e.target.value);
+	},600);	
+	}
+	
+	
+})
 
  
  var table = new Tabulator("#users", {

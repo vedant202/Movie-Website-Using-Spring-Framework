@@ -1,0 +1,40 @@
+@charset "ISO-8859-1";
+
+.searchUsers{
+	    width: 18rem;
+    height: 1.8rem;
+    border-radius: 7px;
+    background: #686363;
+    color: whitesmoke;
+    border: 0.5px solid white;
+    font-size: 1.2rem;
+}
+
+.serach_class{
+	margin-bottom: 20px;
+	color: white;
+}
+.serach_class{
+	font-weight: bold;
+	font-size: larger;
+}
+
+#filter-type{
+	 width: 7rem;
+    height: 1.8rem;
+    border-radius: 7px;
+    background: #686363;
+    color: whitesmoke;
+    border: 0.5px solid white;
+    font-size: 1.2rem;
+}
+
+#filter-field{
+	 width: 10rem;
+    height: 1.8rem;
+    border-radius: 7px;
+    background: #686363;
+    color: whitesmoke;
+    border: 0.5px solid white;
+    font-size: 1.2rem;
+}
